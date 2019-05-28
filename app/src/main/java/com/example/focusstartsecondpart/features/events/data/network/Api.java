@@ -11,4 +11,5 @@ public interface Api {
 
     @GET("api/v1/Events/registration?token=cftte@mtest20!9")
     Observable<List<Event>> getEventList();
+    //
 }
