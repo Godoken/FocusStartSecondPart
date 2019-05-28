@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features.events.domain.model;
+package com.example.focusstartsecondpart.features.guests.domain.model;
 
 public class Guest {
 

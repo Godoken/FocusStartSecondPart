@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features.events.presentation;
+package com.example.focusstartsecondpart.features.guests.presentation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,34 +12,34 @@ import com.example.focusstartsecondpart.R;
 import com.example.focusstartsecondpart.features.BaseActivity;
 import com.example.focusstartsecondpart.features.BasePresenter;
 import com.example.focusstartsecondpart.features.InterfaceView;
-import com.example.focusstartsecondpart.features.events.domain.model.Event;
+import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class EventsActivity extends BaseActivity implements EventsListView {
+public class GuestsActivity extends BaseActivity implements GuestsListView {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private EventsAdapter eventsAdapter;
+    private GuestsAdapter guestsAdapter;
 
-    private EventsActivityPresenter eventsActivityPresenter;
-    private Observer<List<Event>> listObserver;
+    private GuestsActivityPresenter guestsActivityPresenter;
+    private Observer<List<Guest>> listObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_guests);
 
         initView();
     }
 
     @Override
-    protected BasePresenter<EventsListView> getPresenter() {
-        eventsActivityPresenter = PresenterFactory.createPresenter();
-        return eventsActivityPresenter;
+    protected BasePresenter<GuestsListView> getPresenter() {
+        guestsActivityPresenter = PresenterFactory.createPresenter();
+        return guestsActivityPresenter;
     }
 
     @Override
@@ -49,28 +49,28 @@ public class EventsActivity extends BaseActivity implements EventsListView {
 
     private void initView() {
 
-        progressBar = findViewById(R.id.events_progress);
-        recyclerView = findViewById(R.id.events_recycle_view);
+        progressBar = findViewById(R.id.guests_progress);
+        recyclerView = findViewById(R.id.guests_recycle_view);
 
-        eventsAdapter = new EventsAdapter(this, new EventsAdapter.SelectEventListener() {
+        guestsAdapter = new GuestsAdapter(this, new GuestsAdapter.SelectGuestListener() {
             @Override
-            public void onEventSelect(Event event) {
-                eventsActivityPresenter.onEventSelected(event);
+            public void onGuestSelect(Guest guest) {
+                guestsActivityPresenter.onGuestSelected(guest);
             }
         });
 
-        recyclerView.setAdapter(eventsAdapter);
+        recyclerView.setAdapter(guestsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        listObserver  = new Observer<List<Event>>() {
+        listObserver  = new Observer<List<Guest>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<Event> events) {
-                eventsAdapter.setEvents(events);
+            public void onNext(List<Guest> guests) {
+                guestsAdapter.setGuests(guests);
             }
 
             @Override
@@ -83,8 +83,8 @@ public class EventsActivity extends BaseActivity implements EventsListView {
 
             }
         };
-    }
 
+    }
 
     @Override
     public void showProgress() {
@@ -104,14 +104,12 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     }
 
     @Override
-    public void loadEvents() {
-        eventsActivityPresenter.loadEvents(listObserver);
+    public void loadGuests() {
+        guestsActivityPresenter.loadGuests(listObserver);
     }
 
     @Override
-    public void loadGuests() {
+    public void loadInformation() {
 
     }
-
-
 }

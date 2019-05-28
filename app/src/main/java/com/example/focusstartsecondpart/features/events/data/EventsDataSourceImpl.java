@@ -7,15 +7,13 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class EventsDataSourceImpl implements EventsDataSource {
 
     private EventsLoader eventsLoader;
-    private Observer<List<Event>> listObserver;
-    //private Observable<List<Event>> listObservable;
-    //private Consumer<List<Event>> listConsumer;
 
     public EventsDataSourceImpl(EventsLoader eventsLoader) {
         this.eventsLoader = eventsLoader;
@@ -28,16 +26,14 @@ public class EventsDataSourceImpl implements EventsDataSource {
     }
 
     private void loadEventsFromDatabase(Observer<List<Event>> listObserver){
-
         App.getDataBase().getDatabaseDao().getAllEvents()
-                .subscribeOn(Schedulers.io())
-                //.subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listObserver);
     }
 
     private void loadEventsFromNet(){
-
-        listObserver = new Observer<List<Event>>() {
+        Observer<List<Event>> listObserver = new Observer<List<Event>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -50,7 +46,6 @@ public class EventsDataSourceImpl implements EventsDataSource {
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override

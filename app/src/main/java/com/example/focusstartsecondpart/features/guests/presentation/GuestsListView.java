@@ -1,8 +1,8 @@
-package com.example.focusstartsecondpart.features.events.presentation;
+package com.example.focusstartsecondpart.features.guests.presentation;
 
 import com.example.focusstartsecondpart.features.InterfaceView;
 
-public interface EventsListView extends InterfaceView {
+public interface GuestsListView extends InterfaceView {
 
     void showProgress();
 
@@ -10,7 +10,7 @@ public interface EventsListView extends InterfaceView {
 
     void showError(String message);
 
-    void loadEvents();
+    void loadInformation();
 
     void loadGuests();
 }

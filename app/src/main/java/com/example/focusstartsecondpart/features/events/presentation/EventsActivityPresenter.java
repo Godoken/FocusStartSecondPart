@@ -25,9 +25,7 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
     }
 
     public void loadEvents(Observer<List<Event>> listObserver){
-        //view.showProgress();
         eventsInteractor.loadEvents(listObserver);
-        //view.hideProgress();
     }
 
     public void onEventSelected(Event event) {
