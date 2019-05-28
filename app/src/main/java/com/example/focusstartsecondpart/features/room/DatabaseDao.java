@@ -1,10 +1,11 @@
-package com.example.focusstartsecondpart.features.events.data.room;
+package com.example.focusstartsecondpart.features.room;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
+import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.List;
 
@@ -17,5 +18,11 @@ public interface DatabaseDao {
     Observable<List<Event>> getAllEvents();
 
     @Insert
-    void insertAll(List<Event> eventList);
+    void insertAllEvents(List<Event> eventList);
+
+    @Query("SELECT * FROM guest")
+    Observable<List<Guest>> getAllGuests();
+
+    @Insert
+    void insertAllGuests(List<Event> eventList);
 }

@@ -1,15 +1,24 @@
 package com.example.focusstartsecondpart.features.guests.domain.model;
 
-public class Guest {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+
+@Entity
+public final class Guest {
+
+    @NonNull
+    @PrimaryKey private int id;
     private String firstName;
     private String lastName;
-    private String text;
+    private String phone;
 
-    Guest(String firstName, String lastName, String text){
+    Guest(int id, String firstName, String lastName, String phone){
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.text = text;
+        this.phone = phone;
     }
 
     public String getFirstName() {
@@ -20,7 +29,15 @@ public class Guest {
         return lastName;
     }
 
-    public String getText() {
-        return text;
+    public String getPhone() {
+        return phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 }

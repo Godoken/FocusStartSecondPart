@@ -41,7 +41,7 @@ public class EventsDataSourceImpl implements EventsDataSource {
 
             @Override
             public void onNext(List<Event> events) {
-                App.getDataBase().getDatabaseDao().insertAll(events);
+                App.getDataBase().getDatabaseDao().insertAllEvents(events);
             }
 
             @Override

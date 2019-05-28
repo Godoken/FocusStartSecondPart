@@ -5,7 +5,8 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.focusstartsecondpart.features.events.data.room.AppDataBase;
+import com.example.focusstartsecondpart.features.room.AppDataBase;
+
 
 public class App extends Application {
 

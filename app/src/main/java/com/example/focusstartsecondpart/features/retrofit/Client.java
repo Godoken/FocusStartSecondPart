@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features.events.data.network;
+package com.example.focusstartsecondpart.features.retrofit;
 
 
 import com.example.focusstartsecondpart.BuildConfig;
