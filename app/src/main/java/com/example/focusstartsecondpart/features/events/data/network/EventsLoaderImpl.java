@@ -16,8 +16,9 @@ public class EventsLoaderImpl implements EventsLoader{
         api = Client.getInstance().getApi();
 
         api.getEventList()
-                .observeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
+                //.observeOn(Schedulers.io())
+                //.subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .subscribe(listObserver);
 
     }

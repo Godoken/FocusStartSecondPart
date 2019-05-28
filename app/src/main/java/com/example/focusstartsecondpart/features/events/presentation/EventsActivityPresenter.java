@@ -3,7 +3,6 @@ package com.example.focusstartsecondpart.features.events.presentation;
 import com.example.focusstartsecondpart.features.BasePresenter;
 import com.example.focusstartsecondpart.features.events.domain.EventsInteractor;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
-import com.example.focusstartsecondpart.support.Carry;
 
 import java.util.List;
 
@@ -26,7 +25,9 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
     }
 
     public void loadEvents(Observer<List<Event>> listObserver){
+        //view.showProgress();
         eventsInteractor.loadEvents(listObserver);
+        //view.hideProgress();
     }
 
     public void onEventSelected(Event event) {

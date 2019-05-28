@@ -19,8 +19,6 @@ public class PresenterFactory {
         final EventsInteractor eventsInteractor = new EventsInteractorImpl(eventsRepository);
 
         return new EventsActivityPresenter(eventsInteractor);
-
-        //
     }
 
 }

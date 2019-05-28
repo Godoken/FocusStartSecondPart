@@ -1,7 +1,6 @@
 package com.example.focusstartsecondpart.features.events.domain;
 
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
-import com.example.focusstartsecondpart.support.Carry;
 
 import java.util.List;
 

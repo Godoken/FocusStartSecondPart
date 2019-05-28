@@ -6,10 +6,8 @@ import androidx.room.Query;
 
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 @Dao

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.focusstartsecondpart.R;
@@ -58,6 +59,9 @@ public class EventsActivity extends BaseActivity implements EventsListView {
             }
         });
 
+        recyclerView.setAdapter(eventsAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         listObserver  = new Observer<List<Event>>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -79,6 +83,8 @@ public class EventsActivity extends BaseActivity implements EventsListView {
 
             }
         };
+
+        //eventsActivityPresenter.loadEvents(listObserver);
     }
 
 
