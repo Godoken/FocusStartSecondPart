@@ -20,6 +20,7 @@ public class PresenterFactory {
 
         return new EventsActivityPresenter(eventsInteractor);
 
+        //
     }
 
 }
