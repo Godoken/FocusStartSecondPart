@@ -24,5 +24,5 @@ public interface DatabaseDao {
     Observable<List<Guest>> getAllGuests();
 
     @Insert
-    void insertAllGuests(List<Event> eventList);
+    void insertAllGuests(List<Guest> guestList);
 }

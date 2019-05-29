@@ -13,12 +13,14 @@ public final class Guest {
     private String firstName;
     private String lastName;
     private String phone;
+    private boolean isVisited;
 
-    Guest(int id, String firstName, String lastName, String phone){
+    public Guest(int id, String firstName, String lastName, String phone, boolean isVisited){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.isVisited = isVisited;
     }
 
     public String getFirstName() {
@@ -39,5 +41,9 @@ public final class Guest {
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
     }
 }

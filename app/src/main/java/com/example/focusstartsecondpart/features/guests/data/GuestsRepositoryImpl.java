@@ -16,7 +16,7 @@ public class GuestsRepositoryImpl implements GuestsRepository {
     }
 
     @Override
-    public void loadGuests(Observer<List<Guest>> listObserver) {
-        guestsDataSource.loadGuests(listObserver);
+    public void loadGuests(Observer<List<Guest>> listObserver, int id) {
+        guestsDataSource.loadGuests(listObserver, id);
     }
 }

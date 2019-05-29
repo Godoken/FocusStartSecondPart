@@ -23,11 +23,10 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         view.hideProgress();
     }
 
-    public void loadGuests(Observer<List<Guest>> listObserver){
-        guestsInteractor.loadGuests(listObserver);
+    public void loadGuests(Observer<List<Guest>> listObserver, int id){
+        guestsInteractor.loadGuests(listObserver, id);
     }
 
     public void onGuestSelected(Guest guest) {
-
     }
 }

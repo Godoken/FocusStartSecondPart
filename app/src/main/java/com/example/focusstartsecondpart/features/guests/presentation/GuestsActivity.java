@@ -1,5 +1,6 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -105,7 +106,8 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
 
     @Override
     public void loadGuests() {
-        guestsActivityPresenter.loadGuests(listObserver);
+        int id = getIntent().getIntExtra("id", 0);
+        guestsActivityPresenter.loadGuests(listObserver, id);
     }
 
     @Override

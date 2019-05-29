@@ -1,5 +1,6 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,6 +14,7 @@ import com.example.focusstartsecondpart.features.BaseActivity;
 import com.example.focusstartsecondpart.features.BasePresenter;
 import com.example.focusstartsecondpart.features.InterfaceView;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
+import com.example.focusstartsecondpart.features.guests.presentation.GuestsActivity;
 
 import java.util.List;
 
@@ -109,8 +111,10 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     }
 
     @Override
-    public void loadGuests() {
-
+    public void loadGuests(int id) {
+        Intent intent = new Intent(this, GuestsActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
 

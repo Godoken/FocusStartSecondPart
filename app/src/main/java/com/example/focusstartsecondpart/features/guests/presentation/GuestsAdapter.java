@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,20 +55,23 @@ public class GuestsAdapter extends RecyclerView.Adapter<GuestsAdapter.GuestsHold
 
     class GuestsHolder extends RecyclerView.ViewHolder {
 
-        private final TextView guestNameView;
-        private final TextView guestTextView;
+        private final TextView guestFirstNameView;
+        private final TextView guestLastNameView;
+        private final CheckBox guestCheckBox;
         private final GuestsAdapter.SelectGuestListener selectGuestListener;
 
         public GuestsHolder(@NonNull View itemView, GuestsAdapter.SelectGuestListener selectGuestListener) {
             super(itemView);
             this.selectGuestListener = selectGuestListener;
-            guestNameView = itemView.findViewById(R.id.guest_item_name);
-            guestTextView = itemView.findViewById(R.id.guest_item_text);
+            guestFirstNameView = itemView.findViewById(R.id.guest_item_name);
+            guestLastNameView = itemView.findViewById(R.id.guest_item_text);
+            guestCheckBox = itemView.findViewById(R.id.guest_item_checkbox);
         }
 
         void bind(final Guest guest) {
-            guestNameView.setText(guest.getFirstName());
-            guestTextView.setText(guest.getLastName());
+            guestFirstNameView.setText(guest.getFirstName());
+            guestLastNameView.setText(guest.getLastName());
+            guestCheckBox.setChecked(guest.isVisited());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,10 +82,7 @@ public class GuestsAdapter extends RecyclerView.Adapter<GuestsAdapter.GuestsHold
         }
     }
 
-
     interface SelectGuestListener {
-
         void onGuestSelect(Guest guest);
-
     }
 }

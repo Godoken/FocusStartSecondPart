@@ -28,4 +28,10 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="14sp" />
 
+    <CheckBox
+        android:id="@+id/guest_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
 </LinearLayout>

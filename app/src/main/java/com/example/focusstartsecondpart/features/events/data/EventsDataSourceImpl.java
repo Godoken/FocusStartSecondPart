@@ -36,7 +36,6 @@ public class EventsDataSourceImpl implements EventsDataSource {
         Observer<List<Event>> listObserver = new Observer<List<Event>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override

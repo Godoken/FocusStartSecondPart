@@ -12,5 +12,5 @@ public interface EventsListView extends InterfaceView {
 
     void loadEvents();
 
-    void loadGuests();
+    void loadGuests(int id);
 }

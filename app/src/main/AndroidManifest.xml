@@ -22,6 +22,10 @@
 
         </activity>
 
+        <activity android:name=".features.guests.presentation.GuestsActivity"
+            android:launchMode="singleTop">
+        </activity>
+
     </application>
 
 </manifest>

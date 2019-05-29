@@ -12,9 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Client {
 
     private static Client instance = new Client();
+
     private static Api api;
 
     private static final String BASE_URL = "https://team.cft.ru/";
+    private static final String CFT_TEST_TOKEN = "cftte@mtest20!9";
 
     public static Client getInstance(){
         return instance;
@@ -37,5 +39,9 @@ public class Client {
 
     public Api getApi(){
         return api;
+    }
+
+    public String getCftToken(){
+        return CFT_TEST_TOKEN;
     }
 }

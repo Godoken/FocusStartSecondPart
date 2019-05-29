@@ -15,7 +15,7 @@ public class GuestsInteractorImpl implements GuestsInteractor {
     }
 
     @Override
-    public void loadGuests(Observer<List<Guest>> listObserver) {
-        guestsRepository.loadGuests(listObserver);
+    public void loadGuests(Observer<List<Guest>> listObserver, int id) {
+        guestsRepository.loadGuests(listObserver, id);
     }
 }

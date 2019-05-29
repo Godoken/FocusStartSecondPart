@@ -7,5 +7,5 @@ import java.util.List;
 import io.reactivex.Observer;
 
 public interface GuestsDataSource {
-    void loadGuests(Observer<List<Guest>> listObserver);
+    void loadGuests(Observer<List<Guest>> listObserver, int id);
 }

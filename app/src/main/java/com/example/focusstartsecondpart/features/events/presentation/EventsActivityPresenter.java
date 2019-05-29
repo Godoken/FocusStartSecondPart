@@ -29,6 +29,6 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
     }
 
     public void onEventSelected(Event event) {
-
+        view.loadGuests(event.getId());
     }
 }
