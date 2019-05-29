@@ -26,6 +26,10 @@
             android:launchMode="singleTop">
         </activity>
 
+        <activity android:name=".features.profiles.presentation.ProfileActivity"
+            android:launchMode="singleTop">
+        </activity>
+
     </application>
 
 </manifest>

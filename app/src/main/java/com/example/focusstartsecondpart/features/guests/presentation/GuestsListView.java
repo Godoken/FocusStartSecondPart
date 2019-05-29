@@ -2,6 +2,8 @@ package com.example.focusstartsecondpart.features.guests.presentation;
 
 import com.example.focusstartsecondpart.features.InterfaceView;
 
+import java.util.ArrayList;
+
 public interface GuestsListView extends InterfaceView {
 
     void showProgress();
@@ -10,7 +12,7 @@ public interface GuestsListView extends InterfaceView {
 
     void showError(String message);
 
-    void loadInformation();
+    void loadInformation(ArrayList<String> stringArrayList);
 
     void loadGuests();
 }

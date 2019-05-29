@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:outlineSpotShadowColor="@android:color/background_light">
+
+        <TextView
+            android:id="@+id/hintName"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/hint_name"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text=""
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/hintLastName"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/hint_last_name"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text=""
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/hintPhone"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/hint_phone_number"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text=""
+            android:textSize="18sp" />
+
+
+        <ProgressBar
+            android:id="@+id/profile_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+</ScrollView>

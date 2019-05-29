@@ -29,6 +29,7 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
     }
 
     public void onGuestSelected(Guest guest) {
+        view.loadInformation(guestsInteractor.loadProfile(guest));
     }
 
     public void onGuestVisitedChanged(Guest guest) {

@@ -1,5 +1,6 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,7 +14,9 @@ import com.example.focusstartsecondpart.features.BaseActivity;
 import com.example.focusstartsecondpart.features.BasePresenter;
 import com.example.focusstartsecondpart.features.InterfaceView;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
+import com.example.focusstartsecondpart.features.profiles.presentation.ProfileActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -70,7 +73,6 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
         listObserver  = new Observer<List<Guest>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -85,7 +87,6 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
 
             @Override
             public void onComplete() {
-
             }
         };
 
@@ -115,7 +116,9 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
     }
 
     @Override
-    public void loadInformation() {
-
+    public void loadInformation(ArrayList<String> stringArrayList) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("profile", stringArrayList);
+        startActivity(intent);
     }
 }
