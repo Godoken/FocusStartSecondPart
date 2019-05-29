@@ -46,4 +46,8 @@ public final class Guest {
     public boolean isVisited() {
         return isVisited;
     }
+
+    public void setVisited(boolean visited){
+        this.isVisited = visited;
+    }
 }

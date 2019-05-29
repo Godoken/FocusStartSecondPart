@@ -6,6 +6,7 @@ import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +24,32 @@ public class GuestsDataSourceImpl implements GuestsDataSource {
     public void loadGuests(Observer<List<Guest>> listObserver, int id) {
         loadGuestsFromNet(id);
         loadGuestsFromDatabase(listObserver);
+    }
+
+    @Override
+    public void updateGuest(Observable<Guest> guestObservable) {
+        guestObservable.subscribeOn(Schedulers.newThread())
+                .subscribe(new Observer<Guest>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Guest guest) {
+                        App.getDataBase().getDatabaseDao().updateGuest(guest);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void loadGuestsFromDatabase(Observer<List<Guest>> listObserver){

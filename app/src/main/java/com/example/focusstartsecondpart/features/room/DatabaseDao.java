@@ -3,6 +3,7 @@ package com.example.focusstartsecondpart.features.room;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
@@ -25,4 +26,7 @@ public interface DatabaseDao {
 
     @Insert
     void insertAllGuests(List<Guest> guestList);
+
+    @Update
+    void updateGuest(Guest guest);
 }

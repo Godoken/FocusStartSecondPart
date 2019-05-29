@@ -1,6 +1,5 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -57,6 +56,11 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
             @Override
             public void onGuestSelect(Guest guest) {
                 guestsActivityPresenter.onGuestSelected(guest);
+            }
+
+            @Override
+            public void onCheckedChange(Guest guest) {
+                guestsActivityPresenter.onGuestVisitedChanged(guest);
             }
         });
 
