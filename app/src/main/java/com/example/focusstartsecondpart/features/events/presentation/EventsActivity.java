@@ -18,9 +18,6 @@ import com.example.focusstartsecondpart.features.guests.presentation.GuestsActiv
 
 import java.util.List;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
 public class EventsActivity extends BaseActivity implements EventsListView {
 
     private ProgressBar progressBar;
@@ -28,7 +25,6 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     private EventsAdapter eventsAdapter;
 
     private EventsActivityPresenter eventsActivityPresenter;
-    private Observer<List<Event>> listObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,28 +59,6 @@ public class EventsActivity extends BaseActivity implements EventsListView {
 
         recyclerView.setAdapter(eventsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        listObserver  = new Observer<List<Event>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<Event> events) {
-                eventsAdapter.setEvents(events);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                showError(e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
     }
 
 
@@ -106,8 +80,13 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     }
 
     @Override
+    public void setEventsToAdapter(List<Event> eventList) {
+        eventsAdapter.setEvents(eventList);
+    }
+
+    @Override
     public void loadEvents() {
-        eventsActivityPresenter.loadEvents(listObserver);
+        eventsActivityPresenter.loadEvents();
     }
 
     @Override

@@ -30,7 +30,6 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         guestsInteractor.loadGuests(new Observer<List<Guest>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -40,12 +39,10 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onError(Throwable e) {
-
             }
 
             @Override
             public void onComplete() {
-
             }
         }, id);
 

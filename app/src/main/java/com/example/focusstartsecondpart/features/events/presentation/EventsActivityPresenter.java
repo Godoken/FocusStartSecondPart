@@ -7,6 +7,7 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 public class EventsActivityPresenter extends BasePresenter<EventsListView> {
@@ -24,8 +25,25 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
         view.hideProgress();
     }
 
-    public void loadEvents(Observer<List<Event>> listObserver){
-        eventsInteractor.loadEvents(listObserver);
+    public void loadEvents(){
+        eventsInteractor.loadEvents(new Observer<List<Event>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(List<Event> events) {
+                view.setEventsToAdapter(events);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
     }
 
     public void onEventSelected(Event event) {

@@ -1,6 +1,9 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
 import com.example.focusstartsecondpart.features.InterfaceView;
+import com.example.focusstartsecondpart.features.events.domain.model.Event;
+
+import java.util.List;
 
 public interface EventsListView extends InterfaceView {
 
@@ -13,4 +16,6 @@ public interface EventsListView extends InterfaceView {
     void loadEvents();
 
     void loadGuests(int id);
+
+    void setEventsToAdapter(List<Event> eventList);
 }
