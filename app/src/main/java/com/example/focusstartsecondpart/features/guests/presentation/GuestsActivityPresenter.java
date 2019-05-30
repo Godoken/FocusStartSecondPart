@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
@@ -24,8 +25,30 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         view.hideProgress();
     }
 
-    public void loadGuests(Observer<List<Guest>> listObserver, int id){
-        guestsInteractor.loadGuests(listObserver, id);
+    public void loadGuests(int id){
+
+        guestsInteractor.loadGuests(new Observer<List<Guest>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<Guest> guests) {
+                view.setGuestsToAdapter(guests);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, id);
+
     }
 
     public void onGuestSelected(Guest guest) {

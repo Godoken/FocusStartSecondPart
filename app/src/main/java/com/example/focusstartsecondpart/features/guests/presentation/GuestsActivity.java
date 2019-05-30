@@ -19,9 +19,6 @@ import com.example.focusstartsecondpart.features.profiles.presentation.ProfileAc
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
 public class GuestsActivity extends BaseActivity implements GuestsListView {
 
     private ProgressBar progressBar;
@@ -29,7 +26,6 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
     private GuestsAdapter guestsAdapter;
 
     private GuestsActivityPresenter guestsActivityPresenter;
-    private Observer<List<Guest>> listObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,27 +65,6 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
 
         recyclerView.setAdapter(guestsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        listObserver  = new Observer<List<Guest>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-            }
-
-            @Override
-            public void onNext(List<Guest> guests) {
-                guestsAdapter.setGuests(guests);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                showError(e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-            }
-        };
-
     }
 
     @Override
@@ -112,7 +87,12 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
     @Override
     public void loadGuests() {
         int id = getIntent().getIntExtra("id", 0);
-        guestsActivityPresenter.loadGuests(listObserver, id);
+        guestsActivityPresenter.loadGuests(id);
+    }
+
+    @Override
+    public void setGuestsToAdapter(List<Guest> guestList) {
+        guestsAdapter.setGuests(guestList);
     }
 
     @Override
