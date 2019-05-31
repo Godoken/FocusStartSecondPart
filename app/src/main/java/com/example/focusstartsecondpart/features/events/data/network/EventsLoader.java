@@ -4,9 +4,9 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Single;
 
 public interface EventsLoader {
 
-    void loadEvents(Observer<List<Event>> listObserver);
+    Single<List<Event>> loadEvents();
 }

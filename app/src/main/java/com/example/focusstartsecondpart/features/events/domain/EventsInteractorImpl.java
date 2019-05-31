@@ -4,7 +4,7 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Observable;
 
 public class EventsInteractorImpl implements EventsInteractor {
 
@@ -15,7 +15,9 @@ public class EventsInteractorImpl implements EventsInteractor {
     }
 
     @Override
-    public void loadEvents(Observer<List<Event>> listObserver) {
-        eventsRepository.loadEvents(listObserver);
+    public Observable<List<Event>> loadEvents() {
+        return eventsRepository.loadEvents().
+                filter(events -> events != null).
+                filter(events -> events.size() != 0);
     }
 }

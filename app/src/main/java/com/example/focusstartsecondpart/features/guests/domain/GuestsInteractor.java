@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 
 public interface GuestsInteractor {
-    void loadGuests(Observer<List<Guest>> listObserver, int id);
+    Observable<List<Guest>> loadGuests(int id);
 
-    void updateGuest(Observable<Guest> guestObservable);
+    SingleObserver<Guest> updateGuest();
 
     ArrayList<String> loadProfile(Guest guest);
 }

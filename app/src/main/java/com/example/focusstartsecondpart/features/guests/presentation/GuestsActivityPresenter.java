@@ -8,7 +8,10 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
@@ -27,9 +30,12 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
     public void loadGuests(int id){
 
-        guestsInteractor.loadGuests(new Observer<List<Guest>>() {
+        Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id);
+
+        Observer<List<Guest>> listObserver = new Observer<List<Guest>>() {
             @Override
             public void onSubscribe(Disposable d) {
+
             }
 
             @Override
@@ -39,13 +45,16 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onError(Throwable e) {
+
             }
 
             @Override
             public void onComplete() {
-            }
-        }, id);
 
+            }
+        };
+
+        listObservable.subscribe(listObserver);
     }
 
     public void onGuestSelected(Guest guest) {
@@ -53,7 +62,12 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
     }
 
     public void onGuestVisitedChanged(Guest guest) {
-        Observable<Guest> guestObservable = Observable.fromArray(guest);
-        guestsInteractor.updateGuest(guestObservable);
+        Single<Guest> guestSingle = Single.just(guest);
+        SingleObserver<Guest> guestObserver = guestsInteractor.updateGuest();
+
+        guestSingle
+                .subscribeOn(Schedulers.io())
+                .subscribe(guestObserver);
+
     }
 }

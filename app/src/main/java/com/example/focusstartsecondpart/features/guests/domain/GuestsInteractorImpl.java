@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 
 public class GuestsInteractorImpl implements GuestsInteractor {
 
@@ -17,13 +17,15 @@ public class GuestsInteractorImpl implements GuestsInteractor {
     }
 
     @Override
-    public void loadGuests(Observer<List<Guest>> listObserver, int id) {
-        guestsRepository.loadGuests(listObserver, id);
+    public Observable<List<Guest>> loadGuests(int id) {
+        return guestsRepository.loadGuests(id)
+                .filter(guests -> guests != null)
+                .filter(guests -> guests.size() != 0);
     }
 
     @Override
-    public void updateGuest(Observable<Guest> guestObservable) {
-        guestsRepository.updateGuest(guestObservable);
+    public SingleObserver<Guest> updateGuest() {
+        return guestsRepository.updateGuest();
     }
 
     @Override

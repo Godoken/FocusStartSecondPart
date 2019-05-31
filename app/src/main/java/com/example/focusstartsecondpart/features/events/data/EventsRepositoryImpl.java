@@ -5,7 +5,7 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Observable;
 
 public class EventsRepositoryImpl implements EventsRepository {
 
@@ -17,7 +17,7 @@ public class EventsRepositoryImpl implements EventsRepository {
     }
 
     @Override
-    public void loadEvents(Observer<List<Event>> listObserver) {
-        eventsDataSource.loadEvents(listObserver);
+    public Observable<List<Event>> loadEvents() {
+        return eventsDataSource.loadEvents();
     }
 }

@@ -6,7 +6,9 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -14,44 +16,49 @@ import io.reactivex.schedulers.Schedulers;
 public class EventsDataSourceImpl implements EventsDataSource {
 
     private EventsLoader eventsLoader;
+    private Observable<List<Event>> listToUI;
+
+    private SingleObserver<List<Event>> singleObserver;
+    private Single<List<Event>> listSingle;
+
+    private Single<List<Event>> databaseSingle;
 
     public EventsDataSourceImpl(EventsLoader eventsLoader) {
         this.eventsLoader = eventsLoader;
     }
 
     @Override
-    public void loadEvents(Observer<List<Event>> listObserver) {
+    public Observable<List<Event>> loadEvents() {
         loadEventsFromNet();
-        loadEventsFromDatabase(listObserver);
+
+        listToUI = listSingle.toObservable().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        return listToUI;
     }
 
-    private void loadEventsFromDatabase(Observer<List<Event>> listObserver){
-        App.getDataBase().getDatabaseDao().getAllEvents()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(listObserver);
-    }
-
-    private void loadEventsFromNet(){
-        Observer<List<Event>> listObserver = new Observer<List<Event>>() {
+    private void loadEventsFromNet (){
+        listSingle  = eventsLoader.loadEvents();
+        singleObserver = new SingleObserver<List<Event>>() {
             @Override
             public void onSubscribe(Disposable d) {
             }
 
             @Override
-            public void onNext(List<Event> events) {
-                App.getDataBase().getDatabaseDao().insertAllEvents(events);
+            public void onSuccess(List<Event> events) {
+                if (events.size() != 0){
+                    App.getDataBase().getDatabaseDao().updateAllEvents(events);
+                } else {
+                    onError(new Throwable());
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-            }
-
-            @Override
-            public void onComplete() {
-
+                //listSingle = App.getDataBase().getDatabaseDao().getAllEvents();
             }
         };
-        eventsLoader.loadEvents(listObserver);
+        listSingle.subscribeOn(Schedulers.io())
+                .subscribe(singleObserver);
     }
 }
