@@ -43,7 +43,7 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
             @Override
             public void onError(Throwable e) {
-
+                loadEventsFromDatabase();
             }
 
             @Override
@@ -52,6 +52,34 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
             }
         };
         listObservable.subscribe(listObserver);
+    }
+
+    private void loadEventsFromDatabase(){
+
+        Observable<List<Event>> listObservable = eventsInteractor.loadEventsFromDatabase();
+
+        Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<Event> events) {
+                view.setEventsToAdapter(events);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        listObservable.subscribe(listObserver);
+
     }
 
     public void onEventSelected(Event event) {

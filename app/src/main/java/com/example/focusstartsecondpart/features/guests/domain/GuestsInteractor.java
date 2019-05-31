@@ -14,4 +14,6 @@ public interface GuestsInteractor {
     SingleObserver<Guest> updateGuest();
 
     ArrayList<String> loadProfile(Guest guest);
+
+    Observable<List<Guest>> loadGuestsFromDatabase(int id);
 }

@@ -18,6 +18,6 @@ public class GuestsLoaderImpl implements GuestsLoader {
         api = Client.getInstance().getApi();
 
         return api.getGuestList(106, Client.getInstance().getCftToken())
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.newThread());
     }
 }

@@ -20,4 +20,11 @@ public class EventsInteractorImpl implements EventsInteractor {
                 filter(events -> events != null).
                 filter(events -> events.size() != 0);
     }
+
+    @Override
+    public Observable<List<Event>> loadEventsFromDatabase() {
+        return eventsRepository.loadEventsFromDatabase().
+                filter(events -> events != null).
+                filter(events -> events.size() != 0);
+    }
 }

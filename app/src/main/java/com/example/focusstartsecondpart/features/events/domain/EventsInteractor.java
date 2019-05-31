@@ -9,4 +9,6 @@ import io.reactivex.Observable;
 public interface EventsInteractor {
 
     Observable<List<Event>> loadEvents();
+
+    Observable<List<Event>> loadEventsFromDatabase();
 }

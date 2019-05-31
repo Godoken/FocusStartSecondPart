@@ -39,4 +39,11 @@ public class GuestsInteractorImpl implements GuestsInteractor {
 
         return stringArrayList;
     }
+
+    @Override
+    public Observable<List<Guest>> loadGuestsFromDatabase(int id) {
+        return guestsRepository.loadGuestsFromDatabase(id)
+                .filter(guests -> guests != null)
+                .filter(guests -> guests.size() != 0);
+    }
 }

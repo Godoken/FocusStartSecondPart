@@ -20,4 +20,9 @@ public class EventsRepositoryImpl implements EventsRepository {
     public Observable<List<Event>> loadEvents() {
         return eventsDataSource.loadEvents();
     }
+
+    @Override
+    public Observable<List<Event>> loadEventsFromDatabase() {
+        return eventsDataSource.loadEventsFromDatabase();
+    }
 }

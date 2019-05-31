@@ -10,5 +10,7 @@ import io.reactivex.SingleObserver;
 public interface GuestsDataSource {
     Observable<List<Guest>> loadGuests(int id);
 
+    Observable<List<Guest>> loadEventsFromDatabase(int id);
+
     SingleObserver<Guest> updateGuest();
 }

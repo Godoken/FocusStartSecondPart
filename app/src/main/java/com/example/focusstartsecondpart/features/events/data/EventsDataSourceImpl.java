@@ -21,8 +21,6 @@ public class EventsDataSourceImpl implements EventsDataSource {
     private SingleObserver<List<Event>> singleObserver;
     private Single<List<Event>> listSingle;
 
-    private Single<List<Event>> databaseSingle;
-
     public EventsDataSourceImpl(EventsLoader eventsLoader) {
         this.eventsLoader = eventsLoader;
     }
@@ -37,7 +35,7 @@ public class EventsDataSourceImpl implements EventsDataSource {
         return listToUI;
     }
 
-    private void loadEventsFromNet (){
+    private void loadEventsFromNet() {
         listSingle  = eventsLoader.loadEvents();
         singleObserver = new SingleObserver<List<Event>>() {
             @Override
@@ -55,10 +53,17 @@ public class EventsDataSourceImpl implements EventsDataSource {
 
             @Override
             public void onError(Throwable e) {
-                //listSingle = App.getDataBase().getDatabaseDao().getAllEvents();
             }
         };
         listSingle.subscribeOn(Schedulers.io())
                 .subscribe(singleObserver);
+    }
+
+    @Override
+    public Observable<List<Event>> loadEventsFromDatabase() {
+         listToUI = App.getDataBase().getDatabaseDao().getAllEvents().toObservable()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+         return listToUI;
     }
 }

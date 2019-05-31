@@ -8,4 +8,5 @@ import io.reactivex.Observable;
 
 public interface EventsDataSource {
     Observable<List<Event>> loadEvents();
+    Observable<List<Event>> loadEventsFromDatabase();
 }

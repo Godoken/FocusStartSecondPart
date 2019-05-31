@@ -45,7 +45,7 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onError(Throwable e) {
-
+                loadGuestsFromDatabase(id);
             }
 
             @Override
@@ -55,6 +55,34 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         };
 
         listObservable.subscribe(listObserver);
+    }
+
+    private void loadGuestsFromDatabase(int id){
+
+        Observable<List<Guest>> listObservable = guestsInteractor.loadGuestsFromDatabase(id);
+
+        Observer<List<Guest>> listObserver  = new Observer<List<Guest>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<Guest> guests) {
+                view.setGuestsToAdapter(guests);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        listObservable.subscribe(listObserver);
+
     }
 
     public void onGuestSelected(Guest guest) {

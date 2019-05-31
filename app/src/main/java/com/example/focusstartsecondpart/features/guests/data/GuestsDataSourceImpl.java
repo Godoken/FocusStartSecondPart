@@ -76,4 +76,12 @@ public class GuestsDataSourceImpl implements GuestsDataSource {
         listSingle.subscribeOn(Schedulers.io())
                 .subscribe(singleObserver);
     }
+
+    @Override
+    public Observable<List<Guest>> loadEventsFromDatabase(int id) {
+        listToUI = App.getDataBase().getDatabaseDao().getAllGuests().toObservable()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        return listToUI;
+    }
 }
