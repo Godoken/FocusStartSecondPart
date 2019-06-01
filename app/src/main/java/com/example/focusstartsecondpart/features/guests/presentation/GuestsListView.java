@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
-import com.example.focusstartsecondpart.features.InterfaceView;
+import com.example.focusstartsecondpart.App.InterfaceView;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.ArrayList;

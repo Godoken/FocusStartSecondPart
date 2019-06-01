@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.profiles.presentation;
 
-import com.example.focusstartsecondpart.features.BasePresenter;
+import com.example.focusstartsecondpart.App.BasePresenter;
 
 public class ProfileActivityPresenter extends BasePresenter<ProfileView> {
 

@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features;
+package com.example.focusstartsecondpart.App;
 
 public abstract class BasePresenter<View extends InterfaceView> {
 

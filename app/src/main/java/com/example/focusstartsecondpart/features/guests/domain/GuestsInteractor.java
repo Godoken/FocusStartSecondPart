@@ -14,4 +14,6 @@ public interface GuestsInteractor {
     SingleObserver<Guest> updateGuest();
 
     ArrayList<String> loadProfile(Guest guest);
+
+    void updateGuestToNet(int eventId, Guest guest1);
 }

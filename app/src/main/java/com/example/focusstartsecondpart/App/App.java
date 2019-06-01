@@ -1,11 +1,11 @@
-package com.example.focusstartsecondpart;
+package com.example.focusstartsecondpart.App;
 
 import android.app.Application;
 import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.focusstartsecondpart.features.room.AppDataBase;
+import com.example.focusstartsecondpart.App.database.AppDataBase;
 
 
 public class App extends Application {

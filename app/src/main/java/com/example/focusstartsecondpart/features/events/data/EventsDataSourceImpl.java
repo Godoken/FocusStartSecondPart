@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.events.data;
 
-import com.example.focusstartsecondpart.App;
+import com.example.focusstartsecondpart.App.App;
 import com.example.focusstartsecondpart.features.events.data.network.EventsLoader;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 

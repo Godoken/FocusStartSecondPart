@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features.room;
+package com.example.focusstartsecondpart.App.database;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

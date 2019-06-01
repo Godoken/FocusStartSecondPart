@@ -9,4 +9,6 @@ import io.reactivex.Single;
 public interface GuestsLoader {
 
     Single<List<Guest>> loadGuests(int id);
+
+    void updateGuest(int id, Guest guest);
 }

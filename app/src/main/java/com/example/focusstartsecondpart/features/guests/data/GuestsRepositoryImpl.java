@@ -26,4 +26,9 @@ public class GuestsRepositoryImpl implements GuestsRepository {
         return guestsDataSource.updateGuest();
     }
 
+    @Override
+    public void updateGuestToNet(int eventId, Guest guest) {
+        guestsDataSource.updateGuestToNet(eventId, guest);
+    }
+
 }

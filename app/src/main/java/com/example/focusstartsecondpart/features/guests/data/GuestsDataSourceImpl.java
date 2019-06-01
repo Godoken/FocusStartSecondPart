@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.guests.data;
 
-import com.example.focusstartsecondpart.App;
+import com.example.focusstartsecondpart.App.App;
 import com.example.focusstartsecondpart.features.guests.data.network.GuestsLoader;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
@@ -41,6 +41,11 @@ public class GuestsDataSourceImpl implements GuestsDataSource {
             public void onError(Throwable e) {
             }
         };
+    }
+
+    @Override
+    public void updateGuestToNet(int eventId, Guest guest) {
+        guestsLoader.updateGuest(eventId, guest);
     }
 
     private Single<List<Guest>> loadGuestsFromNet(int id){

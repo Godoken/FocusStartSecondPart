@@ -37,4 +37,9 @@ public class GuestsInteractorImpl implements GuestsInteractor {
 
         return stringArrayList;
     }
+
+    @Override
+    public void updateGuestToNet(int eventId, Guest guest1) {
+        guestsRepository.updateGuestToNet(eventId, guest1);
+    }
 }

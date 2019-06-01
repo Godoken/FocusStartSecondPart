@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features;
+package com.example.focusstartsecondpart.App;
 
 import android.os.Bundle;
 

@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
-import com.example.focusstartsecondpart.features.BasePresenter;
+import com.example.focusstartsecondpart.App.BasePresenter;
 import com.example.focusstartsecondpart.features.guests.domain.GuestsInteractor;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
@@ -17,6 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
     private GuestsInteractor guestsInteractor;
+    private int eventId;
 
     public GuestsActivityPresenter(GuestsInteractor guestsInteractor){
         this.guestsInteractor = guestsInteractor;
@@ -31,12 +32,13 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
     public void loadGuests(int id){
 
+        eventId = id;
+
         Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id).toObservable();
 
         Observer<List<Guest>> listObserver = new Observer<List<Guest>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -50,7 +52,6 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onComplete() {
-
             }
         };
 
@@ -69,6 +70,9 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
         guestSingle
                 .subscribeOn(Schedulers.io())
+                .doOnSuccess(guest1 -> {
+                    guestsInteractor.updateGuestToNet(eventId, guest1);
+                })
                 .subscribe(guestObserver);
 
     }

@@ -1,8 +1,8 @@
 package com.example.focusstartsecondpart.features.events.data.network;
 
+import com.example.focusstartsecondpart.App.client.Api;
+import com.example.focusstartsecondpart.App.client.Client;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
-import com.example.focusstartsecondpart.features.retrofit.Api;
-import com.example.focusstartsecondpart.features.retrofit.Client;
 
 import java.util.List;
 

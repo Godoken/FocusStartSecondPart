@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.focusstartsecondpart.App.BaseActivity;
+import com.example.focusstartsecondpart.App.BasePresenter;
+import com.example.focusstartsecondpart.App.InterfaceView;
 import com.example.focusstartsecondpart.R;
-import com.example.focusstartsecondpart.features.BaseActivity;
-import com.example.focusstartsecondpart.features.BasePresenter;
-import com.example.focusstartsecondpart.features.InterfaceView;
 
 import java.util.ArrayList;
 

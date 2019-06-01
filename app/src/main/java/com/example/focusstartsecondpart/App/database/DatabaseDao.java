@@ -1,4 +1,4 @@
-package com.example.focusstartsecondpart.features.room;
+package com.example.focusstartsecondpart.App.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

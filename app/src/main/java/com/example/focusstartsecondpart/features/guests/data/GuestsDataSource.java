@@ -11,4 +11,6 @@ public interface GuestsDataSource {
     Single<List<Guest>> loadGuests(int id);
 
     SingleObserver<Guest> updateGuest();
+
+    void updateGuestToNet(int eventId, Guest guest);
 }

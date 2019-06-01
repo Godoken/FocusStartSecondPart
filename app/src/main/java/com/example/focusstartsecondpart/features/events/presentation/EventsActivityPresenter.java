@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
-import com.example.focusstartsecondpart.features.BasePresenter;
+import com.example.focusstartsecondpart.App.BasePresenter;
 import com.example.focusstartsecondpart.features.events.domain.EventsInteractor;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 

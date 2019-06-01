@@ -1,6 +1,6 @@
 package com.example.focusstartsecondpart.features.profiles.presentation;
 
-import com.example.focusstartsecondpart.features.InterfaceView;
+import com.example.focusstartsecondpart.App.InterfaceView;
 
 public interface ProfileView extends InterfaceView {
 

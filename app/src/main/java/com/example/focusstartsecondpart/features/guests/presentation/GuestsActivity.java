@@ -9,10 +9,10 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.focusstartsecondpart.App.BaseActivity;
+import com.example.focusstartsecondpart.App.BasePresenter;
+import com.example.focusstartsecondpart.App.InterfaceView;
 import com.example.focusstartsecondpart.R;
-import com.example.focusstartsecondpart.features.BaseActivity;
-import com.example.focusstartsecondpart.features.BasePresenter;
-import com.example.focusstartsecondpart.features.InterfaceView;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 import com.example.focusstartsecondpart.features.profiles.presentation.ProfileActivity;
 
