@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 
@@ -27,41 +28,11 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
     }
 
     public void loadEvents(){
-
-        Observable<List<Event>> listObservable = eventsInteractor.loadEvents();
-
-        Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<Event> events) {
-                view.setEventsToAdapter(events);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                loadEventsFromDatabase();
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-        listObservable.subscribe(listObserver);
-    }
-
-    private void loadEventsFromDatabase(){
-
-        Observable<List<Event>> listObservable = eventsInteractor.loadEventsFromDatabase();
+        Observable<List<Event>> listObservable = eventsInteractor.loadEvents().toObservable();
 
         Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -75,11 +46,11 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
             @Override
             public void onComplete() {
-
             }
         };
-        listObservable.subscribe(listObserver);
-
+        listObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(listObserver);
     }
 
     public void onEventSelected(Event event) {

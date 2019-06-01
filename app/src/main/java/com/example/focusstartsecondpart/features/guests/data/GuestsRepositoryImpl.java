@@ -4,9 +4,8 @@ import com.example.focusstartsecondpart.features.guests.domain.GuestsRepository;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.List;
-import java.util.Optional;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 
 public class GuestsRepositoryImpl implements GuestsRepository {
@@ -18,7 +17,7 @@ public class GuestsRepositoryImpl implements GuestsRepository {
     }
 
     @Override
-    public Observable<List<Guest>> loadGuests(int id) {
+    public Single<List<Guest>> loadGuests(int id) {
         return guestsDataSource.loadGuests(id);
     }
 
@@ -27,8 +26,4 @@ public class GuestsRepositoryImpl implements GuestsRepository {
         return guestsDataSource.updateGuest();
     }
 
-    @Override
-    public Observable<List<Guest>> loadGuestsFromDatabase(int id) {
-        return guestsDataSource.loadEventsFromDatabase(id);
-    }
 }

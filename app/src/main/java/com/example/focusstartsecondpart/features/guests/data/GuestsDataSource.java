@@ -4,13 +4,11 @@ import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 
 public interface GuestsDataSource {
-    Observable<List<Guest>> loadGuests(int id);
-
-    Observable<List<Guest>> loadEventsFromDatabase(int id);
+    Single<List<Guest>> loadGuests(int id);
 
     SingleObserver<Guest> updateGuest();
 }

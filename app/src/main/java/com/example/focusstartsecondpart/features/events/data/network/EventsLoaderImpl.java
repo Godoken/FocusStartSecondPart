@@ -18,7 +18,7 @@ public class EventsLoaderImpl implements EventsLoader{
         api = Client.getInstance().getApi();
 
         return api.getEventList(Client.getInstance().getCftToken())
-                .subscribeOn(Schedulers.newThread());
+                .subscribeOn(Schedulers.io());
                 //.subscribe(listObserver);
 
     }

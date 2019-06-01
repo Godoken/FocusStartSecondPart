@@ -2,6 +2,8 @@ package com.example.focusstartsecondpart.features.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -18,8 +20,8 @@ public interface DatabaseDao {
     @Query("SELECT * FROM event")
     Single<List<Event>> getAllEvents();
 
-    @Update
-    void updateAllEvents(List<Event> eventList);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAllEvents(List<Event> eventList);
 
     @Delete
     void deleteAllEvents(List<Event> events);
@@ -27,8 +29,8 @@ public interface DatabaseDao {
     @Query("SELECT * FROM guest")
     Single<List<Guest>> getAllGuests();
 
-    @Update
-    void updateAllGuests(List<Guest> guestList);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAllGuests(List<Guest> guestList);
 
     @Delete
     void deleteAllGuests(List<Guest> guests);

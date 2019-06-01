@@ -4,9 +4,9 @@ import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface EventsDataSource {
-    Observable<List<Event>> loadEvents();
-    Observable<List<Event>> loadEventsFromDatabase();
+    Single<List<Event>> loadEvents();
+    //Single<List<Event>> loadEventsFromDatabase();
 }

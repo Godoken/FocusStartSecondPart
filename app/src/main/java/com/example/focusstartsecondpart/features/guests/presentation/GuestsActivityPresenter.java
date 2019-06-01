@@ -10,6 +10,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -30,7 +31,7 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
     public void loadGuests(int id){
 
-        Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id);
+        Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id).toObservable();
 
         Observer<List<Guest>> listObserver = new Observer<List<Guest>>() {
             @Override
@@ -45,7 +46,6 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onError(Throwable e) {
-                loadGuestsFromDatabase(id);
             }
 
             @Override
@@ -54,35 +54,9 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
             }
         };
 
-        listObservable.subscribe(listObserver);
-    }
-
-    private void loadGuestsFromDatabase(int id){
-
-        Observable<List<Guest>> listObservable = guestsInteractor.loadGuestsFromDatabase(id);
-
-        Observer<List<Guest>> listObserver  = new Observer<List<Guest>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<Guest> guests) {
-                view.setGuestsToAdapter(guests);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-        listObservable.subscribe(listObserver);
-
+        listObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(listObserver);
     }
 
     public void onGuestSelected(Guest guest) {

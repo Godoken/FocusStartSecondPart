@@ -5,7 +5,7 @@ import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 
 public class GuestsInteractorImpl implements GuestsInteractor {
@@ -17,10 +17,8 @@ public class GuestsInteractorImpl implements GuestsInteractor {
     }
 
     @Override
-    public Observable<List<Guest>> loadGuests(int id) {
-        return guestsRepository.loadGuests(id)
-                .filter(guests -> guests != null)
-                .filter(guests -> guests.size() != 0);
+    public Single<List<Guest>> loadGuests(int id) {
+        return guestsRepository.loadGuests(id);
     }
 
     @Override
@@ -38,12 +36,5 @@ public class GuestsInteractorImpl implements GuestsInteractor {
         stringArrayList.add(guest.getPhone());
 
         return stringArrayList;
-    }
-
-    @Override
-    public Observable<List<Guest>> loadGuestsFromDatabase(int id) {
-        return guestsRepository.loadGuestsFromDatabase(id)
-                .filter(guests -> guests != null)
-                .filter(guests -> guests.size() != 0);
     }
 }
