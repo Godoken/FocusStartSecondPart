@@ -3,6 +3,7 @@ package com.example.focusstartsecondpart.features.guests.presentation;
 import com.example.focusstartsecondpart.App.BasePresenter;
 import com.example.focusstartsecondpart.features.guests.domain.GuestsInteractor;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
+import com.example.focusstartsecondpart.features.guests.domain.model.Result;
 
 import java.util.List;
 
@@ -31,15 +32,11 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
     }
 
     public void loadGuests(int id){
-
         eventId = id;
-
         Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id).toObservable();
-
         Observer<List<Guest>> listObserver = new Observer<List<Guest>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-            }
+            public void onSubscribe(Disposable d) { }
 
             @Override
             public void onNext(List<Guest> guests) {
@@ -48,13 +45,12 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
             @Override
             public void onError(Throwable e) {
+                view.showError("Невозможно отобразить список участников");
             }
 
             @Override
-            public void onComplete() {
-            }
+            public void onComplete() { }
         };
-
         listObservable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listObserver);
@@ -65,15 +61,22 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
     }
 
     public void onGuestVisitedChanged(Guest guest) {
-        Single<Guest> guestSingle = Single.just(guest);
-        SingleObserver<Guest> guestObserver = guestsInteractor.updateGuest();
+        Single<Result> resultSingle = guestsInteractor.updateGuest(eventId, guest);
+        SingleObserver<Result> resultSingleObserver = new SingleObserver<Result>() {
+            @Override
+            public void onSubscribe(Disposable d) { }
 
-        guestSingle
-                .subscribeOn(Schedulers.io())
-                .doOnSuccess(guest1 -> {
-                    guestsInteractor.updateGuestToNet(eventId, guest1);
-                })
-                .subscribe(guestObserver);
+            @Override
+            public void onSuccess(Result apiResult) { }
+
+            @Override
+            public void onError(Throwable e) {
+                view.showError("Отсутствует соединение с сервером");
+            }
+        };
+        resultSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(resultSingleObserver);
 
     }
 }

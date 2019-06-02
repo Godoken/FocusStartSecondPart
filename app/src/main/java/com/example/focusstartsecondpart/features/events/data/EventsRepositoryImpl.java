@@ -13,15 +13,10 @@ public class EventsRepositoryImpl implements EventsRepository {
 
     public EventsRepositoryImpl(EventsDataSource eventsDataSource){
         this.eventsDataSource = eventsDataSource;
-
     }
 
     @Override
     public Single<List<Event>> loadEvents() {
         return eventsDataSource.loadEvents();
     }
-
-    /*ingle<List<Event>> loadEventsFromDatabase() {
-        return eventsDataSource.loadEventsFromDatabase();
-    }*/
 }

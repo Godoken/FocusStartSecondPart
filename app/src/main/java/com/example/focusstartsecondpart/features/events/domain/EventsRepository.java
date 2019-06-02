@@ -8,6 +8,4 @@ import io.reactivex.Single;
 
 public interface EventsRepository {
     Single<List<Event>> loadEvents();
-
-    //Single<List<Event>> loadEventsFromDatabase();
 }

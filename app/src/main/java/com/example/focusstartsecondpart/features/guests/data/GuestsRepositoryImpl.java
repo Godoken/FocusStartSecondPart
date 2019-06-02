@@ -2,11 +2,12 @@ package com.example.focusstartsecondpart.features.guests.data;
 
 import com.example.focusstartsecondpart.features.guests.domain.GuestsRepository;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
+import com.example.focusstartsecondpart.features.guests.domain.model.Result;
+import com.example.focusstartsecondpart.features.guests.domain.model.VerifiedMember;
 
 import java.util.List;
 
 import io.reactivex.Single;
-import io.reactivex.SingleObserver;
 
 public class GuestsRepositoryImpl implements GuestsRepository {
 
@@ -22,13 +23,7 @@ public class GuestsRepositoryImpl implements GuestsRepository {
     }
 
     @Override
-    public SingleObserver<Guest> updateGuest() {
-        return guestsDataSource.updateGuest();
+    public Single<Result> updateGuest(int eventId, Guest guest, List<VerifiedMember> verifiedMemberList) {
+        return guestsDataSource.updateGuest(eventId, guest, verifiedMemberList);
     }
-
-    @Override
-    public void updateGuestToNet(int eventId, Guest guest) {
-        guestsDataSource.updateGuestToNet(eventId, guest);
-    }
-
 }

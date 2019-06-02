@@ -1,5 +1,7 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
+import com.example.focusstartsecondpart.App.client.Api;
+import com.example.focusstartsecondpart.App.client.Client;
 import com.example.focusstartsecondpart.features.events.data.EventsDataSource;
 import com.example.focusstartsecondpart.features.events.data.EventsDataSourceImpl;
 import com.example.focusstartsecondpart.features.events.data.EventsRepositoryImpl;
@@ -13,7 +15,8 @@ public class PresenterFactory {
 
     static EventsActivityPresenter createPresenter(){
 
-        final EventsLoader eventsLoader = new EventsLoaderImpl();
+        final Api api = Client.getInstance().getApi();
+        final EventsLoader eventsLoader = new EventsLoaderImpl(api);
         final EventsDataSource eventsDataSource = new EventsDataSourceImpl(eventsLoader);
         final EventsRepository eventsRepository = new EventsRepositoryImpl(eventsDataSource);
         final EventsInteractor eventsInteractor = new EventsInteractorImpl(eventsRepository);

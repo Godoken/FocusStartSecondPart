@@ -33,7 +33,6 @@ public class GuestsAdapter extends RecyclerView.Adapter<GuestsAdapter.GuestsHold
     @Override
     public GuestsAdapter.GuestsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View itemView = layoutInflater.inflate(R.layout.guest_item, parent, false);
-
         return new GuestsAdapter.GuestsHolder(itemView, selectGuestListener);
     }
 
@@ -72,7 +71,7 @@ public class GuestsAdapter extends RecyclerView.Adapter<GuestsAdapter.GuestsHold
         void bind(final Guest guest) {
             guestFirstNameView.setText(guest.getFirstName());
             guestLastNameView.setText(guest.getLastName());
-            guestCheckBox.setChecked(guest.isVisited());
+            guestCheckBox.setChecked(guest.getVisited());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

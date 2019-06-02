@@ -43,7 +43,7 @@ public final class Guest {
         this.id = id;
     }
 
-    public boolean isVisited() {
+    public boolean getVisited() {
         return isVisited;
     }
 

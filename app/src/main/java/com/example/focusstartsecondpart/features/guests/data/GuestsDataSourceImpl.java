@@ -3,12 +3,12 @@ package com.example.focusstartsecondpart.features.guests.data;
 import com.example.focusstartsecondpart.App.App;
 import com.example.focusstartsecondpart.features.guests.data.network.GuestsLoader;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
+import com.example.focusstartsecondpart.features.guests.domain.model.Result;
+import com.example.focusstartsecondpart.features.guests.domain.model.VerifiedMember;
 
 import java.util.List;
 
 import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.disposables.Disposable;
 
 public class GuestsDataSourceImpl implements GuestsDataSource {
 
@@ -20,32 +20,15 @@ public class GuestsDataSourceImpl implements GuestsDataSource {
 
     @Override
     public Single<List<Guest>> loadGuests(int id) {
-
         return loadGuestsFromNet(id)
                 .onErrorResumeNext(throwable -> loadGuestsFromDatabase(id));
     }
 
     @Override
-    public SingleObserver<Guest> updateGuest() {
-        return new SingleObserver<Guest>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-            }
-
-            @Override
-            public void onSuccess(Guest guest) {
-                App.getDataBase().getDatabaseDao().updateGuest(guest);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-        };
-    }
-
-    @Override
-    public void updateGuestToNet(int eventId, Guest guest) {
-        guestsLoader.updateGuest(eventId, guest);
+    public Single<Result> updateGuest(int eventId, Guest guest, List<VerifiedMember> verifiedMemberList) {
+        return guestsLoader.updateGuest(eventId, verifiedMemberList).doOnError(throwable -> {
+            App.getDataBase().getDatabaseDao().updateGuest(guest);
+        });
     }
 
     private Single<List<Guest>> loadGuestsFromNet(int id){

@@ -29,11 +29,9 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
     public void loadEvents(){
         Observable<List<Event>> listObservable = eventsInteractor.loadEvents().toObservable();
-
         Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
             @Override
-            public void onSubscribe(Disposable d) {
-            }
+            public void onSubscribe(Disposable d) { }
 
             @Override
             public void onNext(List<Event> events) {
@@ -42,11 +40,11 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
             @Override
             public void onError(Throwable e) {
+                view.showError("Невозможно отобразить список событий");
             }
 
             @Override
-            public void onComplete() {
-            }
+            public void onComplete() { }
         };
         listObservable
                 .observeOn(AndroidSchedulers.mainThread())
@@ -55,5 +53,11 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
     public void onEventSelected(Event event) {
         view.loadGuests(event.getId());
+    }
+
+    public void onBackPressed() {
+        view.showProgress();
+        view.openQuitDialog();
+        view.hideProgress();
     }
 }

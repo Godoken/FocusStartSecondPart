@@ -31,7 +31,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
     @Override
     public EventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View itemView = layoutInflater.inflate(R.layout.event_item, parent, false);
-
         return new EventsHolder(itemView, selectEventListener);
     }
 
@@ -50,7 +49,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         events.addAll(eventList);
         notifyDataSetChanged();
     }
-
 
     class EventsHolder extends RecyclerView.ViewHolder {
 
@@ -79,8 +77,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
     }
 
     interface SelectEventListener {
-
         void onEventSelect(Event event);
-
     }
 }

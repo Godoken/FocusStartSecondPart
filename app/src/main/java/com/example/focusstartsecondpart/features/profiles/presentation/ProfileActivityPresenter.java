@@ -5,7 +5,6 @@ import com.example.focusstartsecondpart.App.BasePresenter;
 public class ProfileActivityPresenter extends BasePresenter<ProfileView> {
 
     public ProfileActivityPresenter(){
-
     }
 
     @Override

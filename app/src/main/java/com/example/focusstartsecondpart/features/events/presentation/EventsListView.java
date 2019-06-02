@@ -18,4 +18,6 @@ public interface EventsListView extends InterfaceView {
     void loadGuests(int id);
 
     void setEventsToAdapter(List<Event> eventList);
+
+    void openQuitDialog();
 }

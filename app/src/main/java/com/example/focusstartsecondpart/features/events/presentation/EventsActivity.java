@@ -1,11 +1,13 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +48,6 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     }
 
     private void initView() {
-
         progressBar = findViewById(R.id.events_progress);
         recyclerView = findViewById(R.id.events_recycle_view);
 
@@ -56,11 +57,9 @@ public class EventsActivity extends BaseActivity implements EventsListView {
                 eventsActivityPresenter.onEventSelected(event);
             }
         });
-
         recyclerView.setAdapter(eventsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
 
     @Override
     public void showProgress() {
@@ -96,5 +95,29 @@ public class EventsActivity extends BaseActivity implements EventsListView {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        eventsActivityPresenter.onBackPressed();
+    }
 
+    @Override
+    public void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(
+                this);
+        quitDialog.setTitle(R.string.on_back_pressed);
+
+        quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        quitDialog.show();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.focusstartsecondpart.App.client;
 
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
+import com.example.focusstartsecondpart.features.guests.domain.model.Result;
 import com.example.focusstartsecondpart.features.guests.domain.model.VerifiedMember;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface Api {
     Single<List<Guest>> getGuestList(@Path("eventId") int id, @Query("token") String token);
 
     @POST("api/v1/Registration/members/event/{eventId}/confirmation")
-    void updateGuest(@Path("eventId") int id, @Query("token") String token, @Body VerifiedMember verifiedMember);
+    Single<Result> updateGuest(@Path("eventId") int id, @Query("token") String token, @Body List<VerifiedMember> listVerifiedMember);
 }

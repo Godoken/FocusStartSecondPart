@@ -3,4 +3,7 @@
     <string name="hint_name">Name</string>
     <string name="hint_last_name">Last Name</string>
     <string name="hint_phone_number">Phone Number</string>
+    <string name="on_back_pressed">Do you really want to go out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

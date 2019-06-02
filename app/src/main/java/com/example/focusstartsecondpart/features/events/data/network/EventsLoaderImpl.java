@@ -13,13 +13,13 @@ public class EventsLoaderImpl implements EventsLoader{
 
     private Api api;
 
+    public EventsLoaderImpl(Api api){
+        this.api = api;
+    }
+
     @Override
     public Single<List<Event>> loadEvents() {
-        api = Client.getInstance().getApi();
-
         return api.getEventList(Client.getInstance().getCftToken())
                 .subscribeOn(Schedulers.io());
-                //.subscribe(listObserver);
-
     }
 }

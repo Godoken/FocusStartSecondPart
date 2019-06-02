@@ -16,17 +16,6 @@ public class EventsInteractorImpl implements EventsInteractor {
 
     @Override
     public Single<List<Event>> loadEvents() {
-        return eventsRepository.loadEvents();//.
-                //filter(events -> events != null).
-                //filter(events -> events.size() != 0);
+        return eventsRepository.loadEvents();
     }
-
-    /*@Override
-    public Single<List<Event>> loadEventsFromDatabase() {
-        return eventsRepository.loadEventsFromDatabase();
-                //.subscribeOn(Schedulers.io())
-                //.observeOn(AndroidSchedulers.mainThread())//.
-                //.filter(events -> events != null).
-                //.filter(events -> events.size() != 0);
-    }*/
 }
