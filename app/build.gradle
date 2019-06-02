@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    signingConfigs {
+        config {
+            storeFile file('/Applications/Android Studio.app/Contents/bin/Godoken')
+            storePassword '1246vg1246vg'
+            keyAlias = 'key_1246vg'
+            keyPassword '1246vg1246vg'
+        }
+    }
     defaultConfig {
         applicationId "com.example.focusstartsecondpart"
         minSdkVersion 21
@@ -9,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
