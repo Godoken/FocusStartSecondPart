@@ -9,7 +9,6 @@ import java.util.List;
 import io.reactivex.Single;
 
 public interface GuestsLoader {
-
     Single<List<Guest>> loadGuests(int id);
     Single<Result> updateGuest(int id, List<VerifiedMember> verifiedMemberList);
 }

@@ -1,6 +1,8 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
+import com.example.focusstartsecondpart.App.App;
 import com.example.focusstartsecondpart.App.BasePresenter;
+import com.example.focusstartsecondpart.R;
 import com.example.focusstartsecondpart.features.events.domain.EventsInteractor;
 import com.example.focusstartsecondpart.features.events.domain.model.Event;
 
@@ -22,29 +24,32 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
     @Override
     public void onViewReady(){
-        view.showProgress();
         view.loadEvents();
-        view.hideProgress();
     }
 
     public void loadEvents(){
         Observable<List<Event>> listObservable = eventsInteractor.loadEvents().toObservable();
         Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
             @Override
-            public void onSubscribe(Disposable d) { }
+            public void onSubscribe(Disposable d) {view.showProgress(); }
 
             @Override
             public void onNext(List<Event> events) {
-                view.setEventsToAdapter(events);
+                if (events.size() != 0){
+                    view.setEventsToAdapter(events);
+                } else {
+                    view.showError(App.getContext().getString(R.string.error_event_list_clear));
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                view.showError("Невозможно отобразить список событий");
+                view.hideProgress();
+                view.showError(App.getContext().getString(R.string.error_events_list_server));
             }
 
             @Override
-            public void onComplete() { }
+            public void onComplete() {view.hideProgress(); }
         };
         listObservable
                 .observeOn(AndroidSchedulers.mainThread())

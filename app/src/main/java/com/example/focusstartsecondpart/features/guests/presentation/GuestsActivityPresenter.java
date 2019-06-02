@@ -1,6 +1,8 @@
 package com.example.focusstartsecondpart.features.guests.presentation;
 
+import com.example.focusstartsecondpart.App.App;
 import com.example.focusstartsecondpart.App.BasePresenter;
+import com.example.focusstartsecondpart.R;
 import com.example.focusstartsecondpart.features.guests.domain.GuestsInteractor;
 import com.example.focusstartsecondpart.features.guests.domain.model.Guest;
 import com.example.focusstartsecondpart.features.guests.domain.model.Result;
@@ -13,7 +15,6 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
@@ -26,9 +27,12 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
 
     @Override
     public void onViewReady(){
-        view.showProgress();
         view.loadGuests();
-        view.hideProgress();
+    }
+
+    @Override
+    public void detachView(){
+
     }
 
     public void loadGuests(int id){
@@ -36,20 +40,25 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         Observable<List<Guest>> listObservable  = guestsInteractor.loadGuests(id).toObservable();
         Observer<List<Guest>> listObserver = new Observer<List<Guest>>() {
             @Override
-            public void onSubscribe(Disposable d) { }
+            public void onSubscribe(Disposable d) {view.showProgress(); }
 
             @Override
             public void onNext(List<Guest> guests) {
-                view.setGuestsToAdapter(guests);
+                if (guests.size() != 0){
+                    view.setGuestsToAdapter(guests);
+                } else {
+                    view.showError(App.getContext().getString(R.string.error_guests_clear));
+                }
             }
 
             @Override
             public void onError(Throwable e) {
-                view.showError("Невозможно отобразить список участников");
+                view.hideProgress();
+                view.showError(App.getContext().getString(R.string.error_guest_list_server));
             }
 
             @Override
-            public void onComplete() { }
+            public void onComplete() { view.hideProgress();}
         };
         listObservable
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,19 +73,19 @@ public class GuestsActivityPresenter extends BasePresenter<GuestsListView> {
         Single<Result> resultSingle = guestsInteractor.updateGuest(eventId, guest);
         SingleObserver<Result> resultSingleObserver = new SingleObserver<Result>() {
             @Override
-            public void onSubscribe(Disposable d) { }
+            public void onSubscribe(Disposable d) { view.showProgress();}
 
             @Override
-            public void onSuccess(Result apiResult) { }
+            public void onSuccess(Result apiResult) { view.hideProgress();}
 
             @Override
             public void onError(Throwable e) {
-                view.showError("Отсутствует соединение с сервером");
+                view.hideProgress();
+                view.showError(App.getContext().getString(R.string.error_guest_server));
             }
         };
-        resultSingle.subscribeOn(Schedulers.io())
+        resultSingle
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(resultSingleObserver);
-
     }
 }

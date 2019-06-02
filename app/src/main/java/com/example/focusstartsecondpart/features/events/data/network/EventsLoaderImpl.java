@@ -20,6 +20,6 @@ public class EventsLoaderImpl implements EventsLoader{
     @Override
     public Single<List<Event>> loadEvents() {
         return api.getEventList(Client.getInstance().getCftToken())
-                .subscribeOn(Schedulers.io());
+               .subscribeOn(Schedulers.io());
     }
 }

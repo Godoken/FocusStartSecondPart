@@ -26,18 +26,21 @@ public class GuestsDataSourceImpl implements GuestsDataSource {
 
     @Override
     public Single<Result> updateGuest(int eventId, Guest guest, List<VerifiedMember> verifiedMemberList) {
-        return guestsLoader.updateGuest(eventId, verifiedMemberList).doOnError(throwable -> {
-            App.getDataBase().getDatabaseDao().updateGuest(guest);
-        });
+        return guestsLoader.updateGuest(eventId, verifiedMemberList)
+                .doOnSuccess(result -> { App.getDataBase().getDatabaseDao().updateGuest(guest);})
+                .doOnError(throwable -> {App.getDataBase().getDatabaseDao().updateGuest(guest);});
     }
 
     private Single<List<Guest>> loadGuestsFromNet(int id){
         return guestsLoader.loadGuests(id).doOnSuccess(guests -> {
+            guests.forEach(guest -> {
+                guest.setEventId(id);
+            });
             App.getDataBase().getDatabaseDao().insertAllGuests(guests);
         });
     }
 
     private Single<List<Guest>> loadGuestsFromDatabase(int id) {
-        return App.getDataBase().getDatabaseDao().getAllGuests();
+        return App.getDataBase().getDatabaseDao().getAllGuestsByEventId(id);
     }
 }

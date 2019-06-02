@@ -10,6 +10,7 @@ public final class Guest {
 
     @NonNull
     @PrimaryKey private int id;
+    private int eventId;
     private String firstName;
     private String lastName;
     private String phone;
@@ -49,5 +50,13 @@ public final class Guest {
 
     public void setVisited(boolean visited){
         this.isVisited = visited;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 }
