@@ -1,6 +1,5 @@
 package com.example.focusstartsecondpart.features.events.presentation;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,10 +19,17 @@ import com.example.focusstartsecondpart.features.guests.presentation.GuestsActiv
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class EventsActivity extends BaseActivity implements EventsListView {
 
-    private ProgressBar progressBar;
-    private RecyclerView recyclerView;
+    @BindView(R.id.events_progress)
+    ProgressBar progressBar;
+
+    @BindView(R.id.events_recycle_view)
+    RecyclerView recyclerView;
+
     private EventsAdapter eventsAdapter;
 
     private EventsActivityPresenter eventsActivityPresenter;
@@ -48,15 +54,8 @@ public class EventsActivity extends BaseActivity implements EventsListView {
     }
 
     private void initView() {
-        progressBar = findViewById(R.id.events_progress);
-        recyclerView = findViewById(R.id.events_recycle_view);
-
-        eventsAdapter = new EventsAdapter(this, new EventsAdapter.SelectEventListener() {
-            @Override
-            public void onEventSelect(Event event) {
-                eventsActivityPresenter.onEventSelected(event);
-            }
-        });
+        ButterKnife.bind(this);
+        eventsAdapter = new EventsAdapter(this, event -> eventsActivityPresenter.onEventSelected(event));
         recyclerView.setAdapter(eventsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -106,17 +105,9 @@ public class EventsActivity extends BaseActivity implements EventsListView {
                 this);
         quitDialog.setTitle(R.string.on_back_pressed);
 
-        quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
+        quitDialog.setPositiveButton(R.string.yes, (dialog, which) -> finish());
 
-        quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
+        quitDialog.setNegativeButton(R.string.no, (dialog, which) -> {
         });
         quitDialog.show();
     }

@@ -10,29 +10,42 @@ import com.example.focusstartsecondpart.App.BasePresenter;
 import com.example.focusstartsecondpart.App.InterfaceView;
 import com.example.focusstartsecondpart.R;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 
 public class ProfileActivity extends BaseActivity implements ProfileView {
 
     ProfileActivityPresenter profileActivityPresenter;
 
-    private ProgressBar progressBar;
+    @BindView(R.id.profile_progress)
+    ProgressBar progressBar;
 
-    private TextView firstNameTextView;
-    private TextView lastNameTextView;
-    private TextView phoneNumberTextView;
+    @BindViews({R.id.firstName, R.id.lastName, R.id.phone,
+    R.id.hintName, R.id.hintLastName, R.id.hintPhone})
+    List<View> listView;
+
+    @BindView(R.id.firstName)
+    TextView firstNameTextView;
+
+    @BindView(R.id.lastName)
+    TextView lastNameTextView;
+
+    @BindView(R.id.phone)
+    TextView phoneNumberTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         initView();
     }
 
     @Override
     protected  BasePresenter<ProfileView> getPresenter() {
-        profileActivityPresenter = PresenterFactory.createPresenter();
+        profileActivityPresenter = PresenterFactory.createPresenter(getIntent().getStringArrayListExtra("profile"));
         return profileActivityPresenter;
     }
 
@@ -41,37 +54,26 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
         return this;
     }
 
-
     private void initView() {
-        progressBar = findViewById(R.id.profile_progress);
-
-        firstNameTextView = findViewById(R.id.firstName);
-        lastNameTextView = findViewById(R.id.lastName);
-        phoneNumberTextView = findViewById(R.id.phone);
+        ButterKnife.bind(this);
     }
 
     @Override
-    public void showProfile() {
-        ArrayList<String> stringArrayList = getIntent().getStringArrayListExtra("profile");
-
-        firstNameTextView.setText(stringArrayList.get(0));
-        lastNameTextView.setText(stringArrayList.get(1));
-        phoneNumberTextView.setText(stringArrayList.get(2));
+    public void showProfile(String firstName, String lastName, String phoneNumber) {
+        firstNameTextView.setText(firstName);
+        lastNameTextView.setText(lastName);
+        phoneNumberTextView.setText(phoneNumber);
     }
 
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
-        firstNameTextView.setVisibility(View.GONE);
-        lastNameTextView.setVisibility(View.GONE);
-        phoneNumberTextView.setVisibility(View.GONE);
+        listView.forEach(view -> view.setVisibility(View.GONE));
     }
 
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
-        firstNameTextView.setVisibility(View.VISIBLE);
-        lastNameTextView.setVisibility(View.VISIBLE);
-        phoneNumberTextView.setVisibility(View.VISIBLE);
+        listView.forEach(view -> view.setVisibility(View.VISIBLE));
     }
 }

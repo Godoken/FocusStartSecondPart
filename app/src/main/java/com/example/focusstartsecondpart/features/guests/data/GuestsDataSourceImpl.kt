@@ -30,6 +30,5 @@ class GuestsDataSourceImpl(private val guestsLoader: GuestsLoader) : GuestsDataS
 
     private fun loadGuestsFromDatabase(id: Int): Single<List<Guest>> {
         return App.getDataBase().databaseDao.getAllGuestsByEventId(id)
-        //return App.dataBase!!.databaseDao.getAllGuestsByEventId(id)
     }
 }

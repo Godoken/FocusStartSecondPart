@@ -5,4 +5,4 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Event(@field:PrimaryKey
-            var id: Int, var title: String?, var description: String?)
+            var id: Int, var title: String?, var description: String?, var status: Int)

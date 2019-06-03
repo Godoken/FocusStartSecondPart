@@ -10,5 +10,5 @@ interface GuestsInteractor {
 
     fun loadProfile(guest: Guest): ArrayList<String>
 
-    fun updateGuest(eventId: Int, guest1: Guest): Single<Result>
+    fun updateGuest(eventId: Int, guest: Guest): Single<Result>
 }

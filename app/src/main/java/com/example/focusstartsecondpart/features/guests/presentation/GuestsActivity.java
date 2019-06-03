@@ -19,12 +19,18 @@ import com.example.focusstartsecondpart.features.profiles.presentation.ProfileAc
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class GuestsActivity extends BaseActivity implements GuestsListView {
 
-    private ProgressBar progressBar;
-    private RecyclerView recyclerView;
-    private GuestsAdapter guestsAdapter;
+    @BindView(R.id.guests_progress)
+    ProgressBar progressBar;
 
+    @BindView(R.id.guests_recycle_view)
+    RecyclerView recyclerView;
+
+    private GuestsAdapter guestsAdapter;
     private GuestsActivityPresenter guestsActivityPresenter;
 
     @Override
@@ -47,9 +53,7 @@ public class GuestsActivity extends BaseActivity implements GuestsListView {
     }
 
     private void initView() {
-
-        progressBar = findViewById(R.id.guests_progress);
-        recyclerView = findViewById(R.id.guests_recycle_view);
+        ButterKnife.bind(this);
 
         guestsAdapter = new GuestsAdapter(this, new GuestsAdapter.SelectGuestListener() {
             @Override

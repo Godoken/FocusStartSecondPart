@@ -14,7 +14,8 @@ class EventsDataSourceImpl(private val eventsLoader: EventsLoader) : EventsDataS
     }
 
     private fun loadEventsFromNet(): Single<List<Event>> {
-        return eventsLoader.loadEvents().doOnSuccess { events -> App.getDataBase().databaseDao.insertAllEvents(events) }
+        return eventsLoader.loadEvents()
+                .doOnSuccess { events -> App.getDataBase().databaseDao.insertAllEvents(events) }
     }
 
     private fun loadEventsFromDatabase(): Single<List<Event>> {

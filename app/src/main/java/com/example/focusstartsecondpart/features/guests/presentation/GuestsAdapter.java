@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,19 +72,11 @@ public class GuestsAdapter extends RecyclerView.Adapter<GuestsAdapter.GuestsHold
             guestLastNameView.setText(guest.getLastName());
             guestCheckBox.setChecked(guest.getVisited());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectGuestListener.onGuestSelect(guest);
-                }
-            });
+            itemView.setOnClickListener(v -> selectGuestListener.onGuestSelect(guest));
 
-            guestCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    guest.setVisited(isChecked);
-                    selectGuestListener.onCheckedChange(guest);
-                }
+            guestCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                guest.setVisited(isChecked);
+                selectGuestListener.onCheckedChange(guest);
             });
         }
     }

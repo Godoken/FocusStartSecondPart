@@ -29,9 +29,11 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
 
     public void loadEvents(){
         Observable<List<Event>> listObservable = eventsInteractor.loadEvents().toObservable();
-        Observer<List<Event>> listObserver  = new Observer<List<Event>>() {
+        Observer<List<Event>> listObserver = new Observer<List<Event>>() {
             @Override
-            public void onSubscribe(Disposable d) {view.showProgress(); }
+            public void onSubscribe(Disposable d) {
+                view.showProgress();
+            }
 
             @Override
             public void onNext(List<Event> events) {
@@ -49,7 +51,9 @@ public class EventsActivityPresenter extends BasePresenter<EventsListView> {
             }
 
             @Override
-            public void onComplete() {view.hideProgress(); }
+            public void onComplete() {
+                view.hideProgress();
+            }
         };
         listObservable
                 .observeOn(AndroidSchedulers.mainThread())

@@ -8,5 +8,5 @@ import io.reactivex.Single
 
 interface GuestsLoader {
     fun loadGuests(id: Int): Single<List<Guest>>
-    fun updateGuest(id: Int, verifiedMemberList: List<VerifiedMember>): Single<Result>
+    fun updateGuest(eventId: Int, verifiedMemberList: List<VerifiedMember>): Single<Result>
 }

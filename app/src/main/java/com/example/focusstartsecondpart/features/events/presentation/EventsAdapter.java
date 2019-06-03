@@ -67,12 +67,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
             eventNameView.setText(event.getTitle());
             eventTextView.setText(event.getDescription());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectEventListener.onEventSelect(event);
-                }
-            });
+            itemView.setOnClickListener(v -> selectEventListener.onEventSelect(event));
         }
     }
 
