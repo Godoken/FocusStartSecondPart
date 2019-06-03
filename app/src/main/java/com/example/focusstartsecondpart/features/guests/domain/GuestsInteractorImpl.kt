@@ -4,6 +4,7 @@ import com.example.focusstartsecondpart.features.guests.domain.model.Guest
 import com.example.focusstartsecondpart.features.guests.domain.model.Result
 import com.example.focusstartsecondpart.features.guests.domain.model.VerifiedMember
 import io.reactivex.Single
+import java.text.SimpleDateFormat
 import java.util.*
 
 class GuestsInteractorImpl(private val guestsRepository: GuestsRepository) : GuestsInteractor {
@@ -24,7 +25,8 @@ class GuestsInteractorImpl(private val guestsRepository: GuestsRepository) : Gue
     }
 
     override fun updateGuest(eventId: Int, guest: Guest): Single<Result> {
-        val verifiedMember = VerifiedMember(guest.id, guest.visited, "16.10.1999")
+        val currentDateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+        val verifiedMember = VerifiedMember(guest.id, guest.visited, currentDateFormat)
         val verifiedMemberList = ArrayList<VerifiedMember>()
         verifiedMemberList.add(verifiedMember)
 
